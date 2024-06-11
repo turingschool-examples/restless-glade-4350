@@ -1,17 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Doctor do
+RSpec.describe Patient do
   describe "relationships" do
-    it { should belong_to :hospital }
-    it { should have_many :doctor_patients } 
-    it { should have_many(:patients).through(:doctor_patients) }
+    it { should have_many :doctor_patients }
+    it { should have_many(:doctors).through(:doctor_patients) }
   end
-
+  
   describe "validations" do
-    it { should validate_presence_of :hospital_id }
     it { should validate_presence_of :name }
-    it { should validate_presence_of :specialty }
-    it { should validate_presence_of :university }
+    it { should validate_presence_of :age }
+    it { should validate_numericality_of(:age).only_integer }
   end
 
   before(:each) do 
@@ -34,11 +32,12 @@ RSpec.describe Doctor do
 
     @doctor_patient_4 = DoctorPatient.create!(doctor: @doctor_2, patient: @patient_1)
   end
+
   describe "instance methods" do
-    it "number_of_patients" do
-      expect(@doctor_1.number_of_patients).to eq(3)
-      expect(@doctor_2.number_of_patients).to eq(1)
-      expect(@doctor_3.number_of_patients).to eq(0)
+    it "self.alphabetical_adults" do
+      alphabetical_adults_array = [@patient_1, @patient_3]
+
+      expect(Patient.alphabetical_adults).to eq(alphabetical_adults_array)
     end
   end
 end

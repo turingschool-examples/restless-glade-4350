@@ -1,20 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Doctor do
-  describe "relationships" do
-    it { should belong_to :hospital }
-    it { should have_many :doctor_patients } 
-    it { should have_many(:patients).through(:doctor_patients) }
-  end
-
-  describe "validations" do
-    it { should validate_presence_of :hospital_id }
-    it { should validate_presence_of :name }
-    it { should validate_presence_of :specialty }
-    it { should validate_presence_of :university }
-  end
-
-  before(:each) do 
+RSpec.describe "Patients Index Page" do
+  before(:each) do
     @hospital_1 = Hospital.create(name: "Mercy Hospital")
     @hospital_2 = Hospital.create(name: "Jersey Shore Medical Center")
 
@@ -34,11 +21,24 @@ RSpec.describe Doctor do
 
     @doctor_patient_4 = DoctorPatient.create!(doctor: @doctor_2, patient: @patient_1)
   end
-  describe "instance methods" do
-    it "number_of_patients" do
-      expect(@doctor_1.number_of_patients).to eq(3)
-      expect(@doctor_2.number_of_patients).to eq(1)
-      expect(@doctor_3.number_of_patients).to eq(0)
+# User Story 3 - Patient Index Page
+# As a visitor
+# When I visit the patient index page
+# I see the names of all adult patients (age is greater than 18),
+# And I see the names are in ascending alphabetical order (A - Z, you do not need to account for capitalization)
+  describe "As a visitor, when I visit a patient index page" do
+    it "I see the names of all the adult patients in ascending alphabetical order" do
+      visit "/patients"
+
+      expect(page).to have_content("Adult Patients")
+
+      within("#patients") do
+        expect(page).to have_content(@patient_1.name)
+        expect(page).to have_content(@patient_3.name)
+      
+        expect(page).to_not have_content(@patient_2.name)
+        expect(page).to_not have_content(@patient_4.name)
+      end
     end
   end
 end
