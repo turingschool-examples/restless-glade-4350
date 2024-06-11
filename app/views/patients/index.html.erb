@@ -1,0 +1,8 @@
+<h1><%= "Adult Patients" %></h1>
+<section id="patients">
+<% @patients.alphabetical_adults.each do |patient| %>
+  <section id="patient-<%= patient.id %>">
+  <p><%= patient.name %></P>
+  </section>
+<% end %>
+</section>

@@ -7,6 +7,7 @@
 <% @doctor.patients.each do |patient| %>
   <section id="patient-<%= patient.id %>">
   <%= patient.name %>
+  <%= button_to "Remove", doctor_patient_path(@doctor.id, patient.id), method: :delete %>
   </section>
 <% end %>
 </section>
