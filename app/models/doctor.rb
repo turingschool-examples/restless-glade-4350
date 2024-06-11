@@ -7,4 +7,8 @@ class Doctor < ApplicationRecord
                         :name, 
                         :specialty, 
                         :university
+
+  def number_of_patients
+    patients.count
+  end
 end

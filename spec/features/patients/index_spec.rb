@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-
-RSpec.describe "Gardens Show Page" do
+RSpec.describe "Patients Index Page" do
   before(:each) do
     @hospital_1 = Hospital.create(name: "Mercy Hospital")
     @hospital_2 = Hospital.create(name: "Jersey Shore Medical Center")
