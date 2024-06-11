@@ -33,7 +33,6 @@ RSpec.describe "Patients Index Page" do
       expect(page).to have_content("Adult Patients")
 
       within("#patients") do
- 
         expect(page).to have_content(@patient_1.name)
         expect(page).to have_content(@patient_3.name)
       

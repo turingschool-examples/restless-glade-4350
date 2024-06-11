@@ -35,10 +35,9 @@ RSpec.describe Patient do
 
   describe "instance methods" do
     it "self.alphabetical_adults" do
-      all_patients = Patient.all
       alphabetical_adults_array = [@patient_1, @patient_3]
 
-      expect(all_patients.alphabetical_adults).to eq(alphabetical_adults_array)
+      expect(Patient.alphabetical_adults).to eq(alphabetical_adults_array)
     end
   end
 end
